@@ -34,6 +34,8 @@ public class JTreeBuilder {
 
 		String strUrl = "http://fmgroup.polito.it/quer/teaching/";
 
+		
+		
 		QNode root = build(strUrl);
 		
 		root.visit();
@@ -48,7 +50,8 @@ public class JTreeBuilder {
 
 			QNode root = new QDirectory(strUrl, null);
 			Response response = executeRequest(strUrl);
-			
+
+			loadChilds(root, response);
 			
 			return root;
 		}catch(MalformedURLException e) {
@@ -64,7 +67,7 @@ public class JTreeBuilder {
 			String currentUrl = parentResponse.url().toString();
 			
 			String filePath = new URI(parent.resolvedPath()).getPath();
-			File f = new File(DTOP_PATH +filePath);
+			File f = new File(DTOP_PATH +  "\\" +filePath);
 			
 			if(!f.exists()){
 				//f.mkdir();
